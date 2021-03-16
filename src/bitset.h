@@ -12,6 +12,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <stdint.h>
 
 // Returns the number of bytes needed to store a number of bits
 #define __bitset_size(nbits) ((nbits + 7) >> 3)
