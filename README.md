@@ -10,7 +10,13 @@ $ cd build
 $ cmake ..
 $ make
 $ make test
-$ make install
+$ sudo make install
+```
+
+## Uninstall
+
+```sh
+$ sudo make uninstall
 ```
 
 ## Usage and build
