@@ -2,21 +2,16 @@ cmake_minimum_required(VERSION 3.0)
 project(bitset VERSION 0.1.0 LANGUAGES C)
 set(CMAKE_C_FLAGS "-std=c99 -Wall -Wextra -pedantic")
 
+# Build and install
 include(GNUInstallDirs)
-include_directories(${CMAKE_SOURCE_DIR}/src)
+add_subdirectory(include)
+add_subdirectory(src)
 
-add_library(bitset src/bitset.c)
+# Tests
+include(CTest)
+add_subdirectory(tests)
 
-# install
-install(TARGETS bitset ARCHIVE DESTINATION lib LIBRARY DESTINATION lib COMPONENT library)
-install(FILES src/bitset.h DESTINATION  ${CMAKE_INSTALL_INCLUDEDIR})
-
-# TEST
-enable_testing()
-add_executable(test_bitset tests/test_bitset.c)
-add_test(test_bitset test_bitset)
-target_link_libraries(test_bitset PUBLIC bitset)
-
+# Uninstall
 # source: https://gitlab.kitware.com/cmake/community/-/wikis/FAQ#can-i-do-make-uninstall-with-cmake
 if(NOT TARGET uninstall)
   configure_file(

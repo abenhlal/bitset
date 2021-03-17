@@ -22,7 +22,7 @@ $ sudo make uninstall
 ## Usage and build
 
 ```sh
-$ gcc example.c -o example.bin -lbitset
+$ gcc example.c -o example.bin -L/usr/local/lib/cborg -lbitset
 $ ./example.bin
 bs: 1111011111
 bs_string: 1111011111
@@ -30,7 +30,7 @@ bs_string: 1111011111
 
 ```C
 #include <stdio.h>
-#include <bitset.h>
+#include <cborg/bitset.h>
 
 int main() {
   // bitset : 0000000000
