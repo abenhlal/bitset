@@ -2,13 +2,14 @@ cmake_minimum_required(VERSION 3.0)
 project(bitset VERSION 0.1.0 LANGUAGES C)
 set(CMAKE_C_FLAGS "-std=c99 -Wall -Wextra -pedantic")
 
-# Build and install
 include(GNUInstallDirs)
+include(CTest)
+
+# Build and install
 add_subdirectory(include)
 add_subdirectory(src)
 
 # Tests
-include(CTest)
 add_subdirectory(tests)
 
 # Uninstall
