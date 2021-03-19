@@ -5,8 +5,8 @@
  * it under the terms of the MIT license. See LICENSE for details.
  */
 
-#ifndef _BITSET_H
-#define _BITSET_H
+#ifndef _CBORG_BITSET_H
+#define _CBORG_BITSET_H
 
 #include <stdbool.h>
 #include <stdio.h>
