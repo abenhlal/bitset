@@ -7,7 +7,7 @@
 #include <assert.h>
 #include <stdio.h>
 
-#include "cborg/bitset.h"
+#include <cborg/bitset.h>
 
 void test_bitset_new() {
   // test 0

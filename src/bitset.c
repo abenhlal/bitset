@@ -4,8 +4,8 @@
  * bitset is free software; you can redistribute it and/or modify
  * it under the terms of the MIT license. See LICENSE for details.
  */
-#include "cborg/bitset.h"
 #include <errno.h>
+#include <cborg/bitset.h>
 
 bitset_t *bitset_new(size_t nb_bits) {
   bitset_t *bs = (bitset_t *)calloc(1, sizeof(bitset_t));
