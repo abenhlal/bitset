@@ -1,3 +1,3 @@
-add_library(bitset bitset.c)
-target_link_libraries(bitset PUBLIC bitset-h)
-install(TARGETS bitset DESTINATION   ${CMAKE_INSTALL_LIBDIR}/cborg)
+add_library(cborg-bitset bitset.c)
+target_link_libraries(cborg-bitset PUBLIC cborg-bitset-h)
+install(TARGETS cborg-bitset DESTINATION   ${CMAKE_INSTALL_LIBDIR}/cborg)

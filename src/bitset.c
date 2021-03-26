@@ -7,40 +7,40 @@
 #include <errno.h>
 #include <cborg/bitset.h>
 
-bitset_t *bitset_new(size_t nb_bits) {
+bitset_t *cb_bitset_new(size_t nb_bits) {
   bitset_t *bs = (bitset_t *)calloc(1, sizeof(bitset_t));
   bs->array = (uint8_t *)calloc(__bitset_size(nb_bits), sizeof(uint8_t));
   bs->size = nb_bits;
   return bs;
 }
 
-void bitset_delete(bitset_t *bs) {
+void cb_bitset_delete(bitset_t *bs) {
   free(bs->array);
   free(bs);
 }
 
-size_t bitset_count(bitset_t *bs) {
+size_t cb_bitset_count(bitset_t *bs) {
   return (bs->flip ? (bs->size - bs->count) : bs->count);
 }
 
-size_t bitset_size(bitset_t *bs) { return bs->size; }
+size_t cb_bitset_size(bitset_t *bs) { return bs->size; }
 
-bool bitset_test(bitset_t *bs, size_t idx) {
+bool cb_bitset_test(bitset_t *bs, size_t idx) {
   return bs->flip ^
          ((bs->array[__bitset_byte(idx)] & __bitset_bit_mask(idx)) != 0);
 }
 
-bool bitset_any(bitset_t *bs) {
+bool cb_bitset_any(bitset_t *bs) {
   return (bs->flip ? (bs->count != bs->size) : (bs->count != 0));
 }
 
-bool bitset_none(bitset_t *bs) { return !(bitset_any(bs)); }
+bool cb_bitset_none(bitset_t *bs) { return !(cb_bitset_any(bs)); }
 
-bool bitset_all(bitset_t *bs) {
+bool cb_bitset_all(bitset_t *bs) {
   return (bs->flip ? (bs->count == 0) : (bs->count == bs->size));
 }
 
-void bitset_set(bitset_t *bs, size_t idx, bool value) {
+void cb_bitset_set(bitset_t *bs, size_t idx, bool value) {
   bool flip_value = bs->flip ? !value : value;
   size_t previous_count = __builtin_popcount(bs->array[__bitset_byte(idx)]);
   if (flip_value) {
@@ -52,24 +52,24 @@ void bitset_set(bitset_t *bs, size_t idx, bool value) {
       (__builtin_popcount(bs->array[__bitset_byte(idx)]) - previous_count);
 }
 
-void bitset_reset(bitset_t *bs) {
+void cb_bitset_reset(bitset_t *bs) {
   memset(bs->array, 0, __bitset_size(bs->size));
   bs->flip = false;
   bs->count = 0;
 }
 
-void bitset_flip(bitset_t *bs) { bs->flip = !(bs->flip); }
+void cb_bitset_flip(bitset_t *bs) { bs->flip = !(bs->flip); }
 
-char *bitset_to_string(bitset_t *bs) {
+char *cb_bitset_to_string(bitset_t *bs) {
   char *res = (char *)malloc(sizeof(char) * (bs->size + 1));
   for (size_t i = 0; i < bs->size; i++) {
-    res[i] = bitset_test(bs, i) ? '1' : '0';
+    res[i] = cb_bitset_test(bs, i) ? '1' : '0';
   }
   res[bs->size] = '\0';
   return res;
 }
 
-void bitset_write(bitset_t *bs, const char *path) {
+void cb_bitset_write(bitset_t *bs, const char *path) {
   FILE *file = fopen(path, "wb");
   size_t bytes_to_write = __bitset_size(bs->size);
   size_t bytes_writen = 0;
@@ -91,7 +91,7 @@ void bitset_write(bitset_t *bs, const char *path) {
   fclose(file);
 }
 
-bitset_t *bitset_read(const char *path) {
+bitset_t *cb_bitset_read(const char *path) {
   FILE *file = fopen(path, "rb");
   size_t size = 0;
 
@@ -101,7 +101,7 @@ bitset_t *bitset_read(const char *path) {
   }
 
   fread(&size, sizeof(size_t), 1, file);
-  bitset_t *bs = bitset_new(size);
+  bitset_t *bs = cb_bitset_new(size);
   fread(&(bs->count), sizeof(size_t), 1, file);
   fread(&(bs->flip), sizeof(bool), 1, file);
   while (fread(bs->array, sizeof(uint8_t), bs->size, file) > 0);

@@ -33,32 +33,32 @@ typedef struct bitset_t {
   uint8_t *array;
 } bitset_t;
 
-bitset_t *bitset_new(size_t nb_bits);
+bitset_t *cb_bitset_new(size_t nb_bits);
 
-void bitset_delete(bitset_t *bs);
+void cb_bitset_delete(bitset_t *bs);
 
-size_t bitset_count(bitset_t *bs);
+size_t cb_bitset_count(bitset_t *bs);
 
-size_t bitset_size(bitset_t *bs);
+size_t cb_bitset_size(bitset_t *bs);
 
-bool bitset_test(bitset_t *bs, size_t idx);
+bool cb_bitset_test(bitset_t *bs, size_t idx);
 
-bool bitset_any(bitset_t *bs);
+bool cb_bitset_any(bitset_t *bs);
 
-bool bitset_none(bitset_t *bs);
+bool cb_bitset_none(bitset_t *bs);
 
-bool bitset_all(bitset_t *bs);
+bool cb_bitset_all(bitset_t *bs);
 
-void bitset_set(bitset_t *bs, size_t idx, bool value);
+void cb_bitset_set(bitset_t *bs, size_t idx, bool value);
 
-void bitset_reset(bitset_t *bs);
+void cb_bitset_reset(bitset_t *bs);
 
-void bitset_flip(bitset_t *bs);
+void cb_bitset_flip(bitset_t *bs);
 
-char *bitset_to_string(bitset_t *bs);
+char *cb_bitset_to_string(bitset_t *bs);
 
-void bitset_write(bitset_t *bs, const char *path);
+void cb_bitset_write(bitset_t *bs, const char *path);
 
-bitset_t *bitset_read(const char *path);
+bitset_t *cb_bitset_read(const char *path);
 
 #endif
